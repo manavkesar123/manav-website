@@ -1,74 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Manav's First Website</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-            color: #222;
-            padding: 28px 20px;
-        }
-
-        h1 {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-
-        p {
-            margin-bottom: 16px;
-        }
-
-        button {
-            background-color: #eee;
-            color: #111;
-            border: 1px solid #777;
-            border-radius: 4px;
-            padding: 9px 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #ddd;
-        }
-
-        #message {
-            margin-top: 16px;
-            color: #176b35;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manav's Website</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #D4E9E2;
+      color: #1E3932;
+    }
+    header {
+      background-color: #006241;
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+    }
+    header h1 { margin: 0; font-size: 32px; }
+    .card {
+      background: white;
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 28px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    button {
+      background-color: #006241;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover { background-color: #00754A; }
+    a { color: #006241; font-weight: bold; }
+    #message { margin-top: 16px; color: #006241; font-weight: bold; }
+    footer {
+      background-color: #1E3932;
+      color: white;
+      text-align: center;
+      padding: 14px;
+      font-size: 14px;
+    }
+  </style>
 </head>
-<p><a href="form.html">Go to Visitor Form →</a></p>
 <body>
-
+  <header>
     <h1>Welcome to My Website!</h1>
+  </header>
 
+  <div class="card">
     <p>Hello! My name is Manav.</p>
+    <p>This is my first website published using GitHub Pages.</p>
 
-    <p>
-        This is my first website published
-        using GitHub Pages.
-    </p>
-
-    <button onclick="showMessage()">
-        Click Me
-    </button>
-
+    <button type="button" onclick="showMessage()">Click Me</button>
     <p id="message" role="status"></p>
 
-    <script>
-        function showMessage() {
-            document.getElementById("message")
-                .textContent = "Hello from Manav!";
-        }
-    </script>
+    <p><a href="form.html">Go to Visitor Form →</a></p>
+  </div>
 
+  <footer>© Manav Kesar</footer>
+
+  <script>
+    function showMessage() {
+      document.getElementById("message").textContent = "Hello from Manav!";
+    }
+  </script>
 </body>
 </html>
