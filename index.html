@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Manav's First Website</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: #222;
+            padding: 28px 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 16px;
+        }
+
+        button {
+            background-color: #eee;
+            color: #111;
+            border: 1px solid #777;
+            border-radius: 4px;
+            padding: 9px 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+
+        #message {
+            margin-top: 16px;
+            color: #176b35;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Welcome to My Website!</h1>
+
+    <p>Hello! My name is Manav.</p>
+
+    <p>
+        This is my first website published
+        using GitHub Pages.
+    </p>
+
+    <button onclick="showMessage()">
+        Click Me
+    </button>
+
+    <p id="message" role="status"></p>
+
+    <script>
+        function showMessage() {
+            document.getElementById("message")
+                .textContent = "Hello from Manav!";
+        }
+    </script>
+
+</body>
+</html>
