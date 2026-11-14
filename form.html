@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visitor Info</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 28px 20px; color: #222; }
+    label { display: block; margin-top: 12px; font-weight: bold; }
+    input { padding: 8px; width: 250px; margin-top: 4px; }
+    button { margin-top: 16px; padding: 9px 16px; cursor: pointer; }
+    #error { color: #b00020; }
+    table { margin-top: 20px; border-collapse: collapse; }
+    th, td { border: 1px solid #999; padding: 6px 12px; }
+  </style>
+</head>
+<body>
+  <h1>Tell Me About You</h1>
+
+  <form id="infoForm">
+    <label for="name">What is your name?</label>
+    <input type="text" id="name" required>
+
+    <label for="age">What is your age?</label>
+    <input type="number" id="age" min="1" max="120" required>
+
+    <button type="submit">Save</button>
+    <button type="button" id="clearBtn">Clear All</button>
+  </form>
+
+  <p id="error"></p>
+
+  <h2>Saved Entries</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Age</th></tr></thead>
+    <tbody id="entries"></tbody>
+  </table>
+
+  <p><a href="index.html">← Back to Home</a></p>
+
+  <script>
+    const form = document.getElementById("infoForm");
+    const tableBody = document.getElementById("entries");
+    const error = document.getElementById("error");
+
+    function loadEntries() {
+      return JSON.parse(localStorage.getItem("visitors") || "[]");
+    }
+
+    function showEntries() {
+      tableBody.innerHTML = "";
+      loadEntries().forEach(entry => {
+        const row = tableBody.insertRow();
+        row.insertCell().textContent = entry.name;
+        row.insertCell().textContent = entry.age;
+      });
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const age = Number(document.getElementById("age").value);
+
+      if (!name || age < 1 || age > 120) {
+        error.textContent = "Please enter a valid name and age (1–120).";
+        return;
+      }
+      error.textContent = "";
+
+      const entries = loadEntries();
+      entries.push({ name: name, age: age });
+      localStorage.setItem("visitors", JSON.stringify(entries));
+
+      form.reset();
+      showEntries();
+    });
+
+    document.getElementById("clearBtn").addEventListener("click", function () {
+      localStorage.removeItem("visitors");
+      showEntries();
+    });
+
+    showEntries();
+  </script>
+</body>
+</html>
