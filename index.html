@@ -1,72 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manav's Website</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #D4E9E2;
-      color: #1E3932;
-    }
-    header {
-      background-color: #006241;
-      color: white;
-      padding: 24px 20px;
-      text-align: center;
-    }
-    header h1 { margin: 0; font-size: 32px; }
-    .card {
-      background: white;
-      max-width: 700px;
-      margin: 30px auto;
-      padding: 28px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    button {
-      background-color: #006241;
-      color: white;
-      border: none;
-      border-radius: 50px;
-      padding: 10px 22px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    button:hover { background-color: #00754A; }
-    a { color: #006241; font-weight: bold; }
-    #message { margin-top: 16px; color: #006241; font-weight: bold; }
-    footer {
-      background-color: #1E3932;
-      color: white;
-      text-align: center;
-      padding: 14px;
-      font-size: 14px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manav's Website</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: Arial, sans-serif; color: #1E3932; min-height: 100vh;
+    background: linear-gradient(135deg, #1E3932, #006241, #00754A, #D4E9E2);
+    background-size: 400% 400%; animation: bgShift 12s ease infinite; overflow-x: hidden;
+  }
+  @keyframes bgShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+  header { text-align: center; padding: 40px 20px 20px; color: #fff; }
+
+  /* Animated MK logo */
+  .logo { width: 120px; height: 120px; margin: 0 auto 16px; position: relative; }
+  .ring { position: absolute; inset: 0; border-radius: 50%; border: 4px dashed #D4E9E2; animation: spin 8s linear infinite; }
+  .badge { position: absolute; inset: 12px; border-radius: 50%; background: #fff; color: #006241;
+           display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: bold;
+           animation: glow 2s ease-in-out infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes glow { 0%,100%{box-shadow:0 0 10px #D4E9E2} 50%{box-shadow:0 0 35px #fff, 0 0 60px #00754A} }
+
+  /* Shimmering title */
+  h1 { margin: 0; font-size: 40px;
+       background: linear-gradient(90deg, #fff, #D4E9E2, #fff8dc, #fff); background-size: 200% auto;
+       -webkit-background-clip: text; background-clip: text; color: transparent;
+       animation: shine 3s linear infinite; }
+  @keyframes shine { to { background-position: 200% center; } }
+  .tagline { opacity: .9; margin-top: 8px; }
+
+  .card { background: rgba(255,255,255,.93); max-width: 700px; margin: 20px auto 40px; padding: 30px;
+          border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,.3); animation: rise 1s ease-out; }
+  @keyframes rise { from{opacity:0; transform:translateY(30px)} to{opacity:1; transform:none} }
+
+  .skills { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+  .chip { background: #006241; color: #fff; padding: 6px 14px; border-radius: 50px; font-size: 14px; transition: transform .2s; }
+  .chip:hover { transform: scale(1.1); }
+
+  button { background: #006241; color: #fff; border: none; border-radius: 50px; padding: 12px 26px;
+           font-weight: bold; cursor: pointer; transition: transform .2s, box-shadow .2s; }
+  button:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,98,65,.5); }
+  #message { font-weight: bold; color: #006241; min-height: 20px; }
+  a { color: #006241; font-weight: bold; }
+
+  /* Floating coffee icons */
+  .bean { position: fixed; bottom: -40px; font-size: 24px; animation: floatUp linear infinite; pointer-events: none; }
+  @keyframes floatUp { to { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
+
+  footer { text-align: center; color: #fff; padding: 16px; }
+
+  /* Turns off motion for visitors who prefer less animation */
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
 </head>
 <body>
   <header>
+    <div class="logo"><div class="ring"></div><div class="badge">MK</div></div>
     <h1>Welcome to My Website!</h1>
+    <p class="tagline">Tax Technology · AI · Automation ☕</p>
   </header>
 
   <div class="card">
-    <p>Hello! My name is Manav.</p>
+    <p>Hello! My name is <strong>Manav</strong>.</p>
     <p>This is my first website published using GitHub Pages.</p>
-
-    <button type="button" onclick="showMessage()">Click Me</button>
+    <div class="skills">
+      <span class="chip">Vertex</span>
+      <span class="chip">Oracle</span>
+      <span class="chip">Alteryx</span>
+      <span class="chip">AI &amp; Automation</span>
+    </div>
+    <button type="button" id="helloBtn">Click Me ✨</button>
     <p id="message" role="status"></p>
-
     <p><a href="form.html">Go to Visitor Form →</a></p>
   </div>
 
   <footer>© Manav Kesar</footer>
 
   <script>
-    function showMessage() {
-      document.getElementById("message").textContent = "Hello from Manav!";
+    document.getElementById("helloBtn").addEventListener("click", function () {
+      document.getElementById("message").textContent = "Hello from Manav! ☕";
+    });
+
+    // Create floating coffee icons
+    for (let i = 0; i < 12; i++) {
+      const b = document.createElement("div");
+      b.className = "bean";
+      b.textContent = i % 2 ? "☕" : "✨";
+      b.style.left = Math.random() * 100 + "vw";
+      b.style.animationDuration = (8 + Math.random() * 8) + "s";
+      b.style.animationDelay = (Math.random() * 8) + "s";
+      document.body.appendChild(b);
     }
   </script>
 </body>
