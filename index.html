@@ -3,97 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manav's Website</title>
+<title>Manav's Hub</title>
 <style>
   * { box-sizing: border-box; }
-  body {
-    margin: 0; font-family: Arial, sans-serif; color: #1E3932; min-height: 100vh;
+  body { margin: 0; font-family: Arial, sans-serif; color: #1E3932; min-height: 100vh;
     background: linear-gradient(135deg, #1E3932, #006241, #00754A, #D4E9E2);
-    background-size: 400% 400%; animation: bgShift 12s ease infinite; overflow-x: hidden;
-  }
-  @keyframes bgShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    background-size: 400% 400%; animation: bg 12s ease infinite; }
+  @keyframes bg { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
-  header { text-align: center; padding: 40px 20px 20px; color: #fff; }
-
-  /* Animated MK logo */
-  .logo { width: 120px; height: 120px; margin: 0 auto 16px; position: relative; }
+  header { text-align: center; padding: 30px 16px 10px; color: #fff; }
+  .logo { width: 100px; height: 100px; margin: 0 auto 12px; position: relative; }
   .ring { position: absolute; inset: 0; border-radius: 50%; border: 4px dashed #D4E9E2; animation: spin 8s linear infinite; }
-  .badge { position: absolute; inset: 12px; border-radius: 50%; background: #fff; color: #006241;
-           display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: bold;
-           animation: glow 2s ease-in-out infinite; }
+  .badge { position: absolute; inset: 10px; border-radius: 50%; background: #fff; color: #006241;
+    display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: bold;
+    animation: glow 2s ease-in-out infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
   @keyframes glow { 0%,100%{box-shadow:0 0 10px #D4E9E2} 50%{box-shadow:0 0 35px #fff, 0 0 60px #00754A} }
-
-  /* Shimmering title */
-  h1 { margin: 0; font-size: 40px;
-       background: linear-gradient(90deg, #fff, #D4E9E2, #fff8dc, #fff); background-size: 200% auto;
-       -webkit-background-clip: text; background-clip: text; color: transparent;
-       animation: shine 3s linear infinite; }
+  h1 { margin: 0; font-size: 38px;
+    background: linear-gradient(90deg, #fff, #D4E9E2, #fff8dc, #fff); background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 3s linear infinite; }
   @keyframes shine { to { background-position: 200% center; } }
-  .tagline { opacity: .9; margin-top: 8px; }
 
-  .card { background: rgba(255,255,255,.93); max-width: 700px; margin: 20px auto 40px; padding: 30px;
-          border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,.3); animation: rise 1s ease-out; }
-  @keyframes rise { from{opacity:0; transform:translateY(30px)} to{opacity:1; transform:none} }
+  /* Tabs */
+  nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 14px; }
+  .tab { background: rgba(255,255,255,.18); color: #fff; border: 1px solid rgba(255,255,255,.4);
+    border-radius: 50px; padding: 10px 18px; font-weight: bold; cursor: pointer; }
+  .tab[aria-selected="true"] { background: #fff; color: #006241; }
 
-  .skills { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
-  .chip { background: #006241; color: #fff; padding: 6px 14px; border-radius: 50px; font-size: 14px; transition: transform .2s; }
-  .chip:hover { transform: scale(1.1); }
+  .card { background: rgba(255,255,255,.95); max-width: 720px; margin: 0 auto 20px; padding: 26px;
+    border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,.3); animation: rise .4s ease-out; }
+  @keyframes rise { from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:none} }
+  h2 { margin-top: 0; color: #006241; }
 
-  button { background: #006241; color: #fff; border: none; border-radius: 50px; padding: 12px 26px;
-           font-weight: bold; cursor: pointer; transition: transform .2s, box-shadow .2s; }
-  button:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,98,65,.5); }
-  #message { font-weight: bold; color: #006241; min-height: 20px; }
-  a { color: #006241; font-weight: bold; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  .tile { background: #D4E9E2; border-radius: 12px; padding: 14px; }
+  .tile b { display: block; color: #006241; margin-bottom: 4px; }
+  .chip { display: inline-block; background: #006241; color: #fff; padding: 6px 14px; border-radius: 50px; margin: 4px 4px 0 0; }
 
-  /* Floating coffee icons */
-  .bean { position: fixed; bottom: -40px; font-size: 24px; animation: floatUp linear infinite; pointer-events: none; }
-  @keyframes floatUp { to { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
+  .btn { background: #006241; color: #fff; border: none; border-radius: 50px; padding: 11px 22px;
+    font-weight: bold; cursor: pointer; margin: 12px 6px 0 0; }
+  .btn.alt { background: #1E3932; }
+  label { display: block; margin-top: 12px; font-weight: bold; }
+  input { width: 100%; max-width: 280px; padding: 8px; border: 1px solid #006241; border-radius: 6px; margin-top: 4px; }
+  #error { color: #b00020; }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  th { background: #006241; color: #fff; }
+  th, td { border: 1px solid #1E3932; padding: 6px 10px; text-align: left; }
+  #message { font-weight: bold; color: #006241; }
+  footer { text-align: center; color: #fff; padding: 10px 0 20px; }
 
-  footer { text-align: center; color: #fff; padding: 16px; }
-
-  /* Turns off motion for visitors who prefer less animation */
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
 </style>
 </head>
 <body>
   <header>
     <div class="logo"><div class="ring"></div><div class="badge">MK</div></div>
-    <h1>Welcome to My Website!</h1>
-    <p class="tagline">Tax Technology · AI · Automation ☕</p>
+    <h1>Manav's Hub</h1>
+    <p>Tax Technology · AI · Automation ☕</p>
   </header>
 
-  <div class="card">
-    <p>Hello! My name is <strong>Manav</strong>.</p>
-    <p>This is my first website published using GitHub Pages.</p>
-    <div class="skills">
-      <span class="chip">Vertex</span>
-      <span class="chip">Oracle</span>
-      <span class="chip">Alteryx</span>
-      <span class="chip">AI &amp; Automation</span>
+  <nav role="tablist">
+    <button class="tab" role="tab" data-tab="home">🏠 Home</button>
+    <button class="tab" role="tab" data-tab="about">👤 About</button>
+    <button class="tab" role="tab" data-tab="skills">🛠 Skills</button>
+    <button class="tab" role="tab" data-tab="projects">🚀 Projects</button>
+    <button class="tab" role="tab" data-tab="form">📝 Visitor Form</button>
+    <button class="tab" role="tab" data-tab="contact">✉️ Contact</button>
+  </nav>
+
+  <section class="card" id="home" role="tabpanel">
+    <h2>Welcome!</h2>
+    <p>Hello! My name is <strong>Manav</strong>. This is my hub, published using GitHub Pages.</p>
+    <button class="btn" id="helloBtn">Click Me ✨</button>
+    <p id="message" aria-live="polite"></p>
+  </section>
+
+  <section class="card" id="about" role="tabpanel" hidden>
+    <h2>About Me</h2>
+    <p>Tax technology leader with 15+ years of experience across global implementations, vision, and roadmapping.</p>
+    <p>Currently exploring AI, Python, and automation.</p>
+  </section>
+
+  <section class="card" id="skills" role="tabpanel" hidden>
+    <h2>Skills</h2>
+    <span class="chip">Vertex O Series</span><span class="chip">Oracle</span>
+    <span class="chip">Alteryx</span><span class="chip">Python</span>
+    <span class="chip">Generative AI</span><span class="chip">Automation</span>
+  </section>
+
+  <section class="card" id="projects" role="tabpanel" hidden>
+    <h2>Projects</h2>
+    <div class="grid">
+      <div class="tile"><b>Tax Engine</b>Tax calculation platform integration</div>
+      <div class="tile"><b>AI Learning</b>Python and AI practice</div>
+      <div class="tile"><b>This Website</b>Built with HTML, CSS, and JavaScript</div>
     </div>
-    <button type="button" id="helloBtn">Click Me ✨</button>
-    <p id="message" role="status"></p>
-    <p><a href="form.html">Go to Visitor Form →</a></p>
-  </div>
+  </section>
+
+  <section class="card" id="form" role="tabpanel" hidden>
+    <h2>Visitor Form</h2>
+    <form id="infoForm" novalidate>
+      <label for="name">What is your name?</label>
+      <input type="text" id="name" maxlength="50">
+      <label for="age">What is your age?</label>
+      <input type="number" id="age" min="1" max="120">
+      <br>
+      <button type="submit" class="btn">Save</button>
+      <button type="button" class="btn alt" id="clearBtn">Clear All</button>
+    </form>
+    <p id="error" aria-live="polite"></p>
+    <table>
+      <thead><tr><th>Name</th><th>Age</th></tr></thead>
+      <tbody id="entries"></tbody>
+    </table>
+  </section>
+
+  <section class="card" id="contact" role="tabpanel" hidden>
+    <h2>Contact</h2>
+    <p>Connect with me on GitHub: <a href="https://github.com/manavkesar123">manavkesar123</a></p>
+  </section>
 
   <footer>© Manav Kesar</footer>
 
   <script>
-    document.getElementById("helloBtn").addEventListener("click", function () {
+    // ---- Tabs ----
+    const tabs = document.querySelectorAll(".tab");
+    const panels = document.querySelectorAll("[role=tabpanel]");
+
+    function showTab(name) {
+      tabs.forEach(t => t.setAttribute("aria-selected", t.dataset.tab === name));
+      panels.forEach(p => p.hidden = p.id !== name);
+      history.replaceState(null, "", "#" + name);   // lets you share links like #form
+    }
+    tabs.forEach(t => t.addEventListener("click", () => showTab(t.dataset.tab)));
+    const start = location.hash.slice(1);
+    showTab(document.getElementById(start) ? start : "home");
+
+    // ---- Home button ----
+    document.getElementById("helloBtn").addEventListener("click", () => {
       document.getElementById("message").textContent = "Hello from Manav! ☕";
     });
 
-    // Create floating coffee icons
-    for (let i = 0; i < 12; i++) {
-      const b = document.createElement("div");
-      b.className = "bean";
-      b.textContent = i % 2 ? "☕" : "✨";
-      b.style.left = Math.random() * 100 + "vw";
-      b.style.animationDuration = (8 + Math.random() * 8) + "s";
-      b.style.animationDelay = (Math.random() * 8) + "s";
-      document.body.appendChild(b);
+    // ---- Visitor form (saved in this browser) ----
+    const tableBody = document.getElementById("entries");
+    const load = () => JSON.parse(localStorage.getItem("visitors") || "[]");
+
+    function draw() {
+      tableBody.innerHTML = "";
+      load().forEach(e => {
+        const row = tableBody.insertRow();
+        row.insertCell().textContent = e.name;
+        row.insertCell().textContent = e.age;
+      });
     }
+
+    document.getElementById("infoForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const age = Number(document.getElementById("age").value);
+      const error = document.getElementById("error");
+      if (!name || age < 1 || age > 120) {
+        error.textContent = "Please enter a name and an age from 1 to 120.";
+        return;
+      }
+      error.textContent = "";
+      const list = load();
+      list.push({ name, age });
+      localStorage.setItem("visitors", JSON.stringify(list));
+      e.target.reset();
+      draw();
+    });
+
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      localStorage.removeItem("visitors");
+      draw();
+    });
+
+    draw();
   </script>
 </body>
 </html>
